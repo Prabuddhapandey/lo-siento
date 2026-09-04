@@ -11,9 +11,10 @@
   "dependencies": {
     "@vitejs/plugin-react": "latest",
     "framer-motion": "latest",
-    "vite": "latest",
     "react": "latest",
     "react-dom": "latest"
   },
-  "devDependencies": {}
+  "devDependencies": {
+    "vite": "^8.2.2"
+  }
 }
