@@ -1,0 +1,201 @@
+@import url('https://fonts.googleapis.com/css2?family=Dancing+Script:wght@500;600;700&family=Gaegu:wght@400;700&family=Schoolbell&display=swap');
+
+:root {
+  color: #3f3a40;
+  background: #f6efdf;
+  --paper: #f6efdf;
+  --charcoal: #3f3a40;
+  --graphite-soft: #625b62;
+  --pencil-teal: #587f7c;
+  --pencil-cyan: #719493;
+  --pencil-royal: #5d5782;
+  --pencil-violet: #756b98;
+  --pencil-rose: #b76f73;
+  --sunflower-gold: #c99b3c;
+  --sunflower-umber: #68482f;
+  --stem-sage: #6f7d62;
+  font-family: 'Schoolbell', 'Segoe Print', cursive;
+  font-synthesis: none;
+  text-rendering: optimizeLegibility;
+}
+
+* { box-sizing: border-box; }
+html, body, #root { width: 100%; min-width: 320px; height: 100%; min-height: 100%; margin: 0; overflow: hidden; background: var(--paper); }
+::selection { color: #fffaf2; background: #6d67a8; }
+
+.sketch-page {
+  position: relative;
+  isolation: isolate;
+  display: grid;
+  width: 100%;
+  height: 100svh;
+  min-height: 100svh;
+  place-items: center;
+  overflow: hidden;
+  padding: max(1.2rem, env(safe-area-inset-top)) max(1.2rem, env(safe-area-inset-right)) max(1.2rem, env(safe-area-inset-bottom)) max(1.2rem, env(safe-area-inset-left));
+  background: var(--paper);
+}
+
+.sketch-page::before {
+  content: '';
+  position: absolute;
+  z-index: 20;
+  inset: 0;
+  pointer-events: none;
+  opacity: .12;
+  background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 180 180' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='p'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.72' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23p)' opacity='.18'/%3E%3C/svg%3E");
+  mix-blend-mode: multiply;
+}
+
+.paper-patches {
+  position: absolute;
+  inset: 0;
+  z-index: -1;
+  opacity: .26;
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='100' height='80' viewBox='0 0 100 80'%3E%3Cpath d='M0 79.5 C22 79.1 61 80.2 100 79.4' fill='none' stroke='%23756f76' stroke-opacity='.20' stroke-width='.55'/%3E%3C/svg%3E");
+}
+
+.doodle-lines { position: absolute; inset: 0; z-index: 1; width: 100%; height: 100%; overflow: visible; fill: none; stroke: #676274; stroke-width: 1.7; stroke-linecap: round; stroke-linejoin: round; opacity: .23; }
+.doodle-lines path { vector-effect: non-scaling-stroke; }
+.doodle-lines .dashed,
+.crosshatch,
+.scribble-stars { display: none; }
+.doodle-lines .pencil { stroke: #7f8992; stroke-width: 1.4; opacity: .52; }
+
+.sunflower-field { position: absolute; inset: 0; z-index: 2; pointer-events: none; }
+.sketch-sunflower {
+  position: absolute;
+  left: var(--x);
+  top: var(--y);
+  width: var(--size);
+  overflow: visible;
+  opacity: .78;
+}
+
+.sketch-sunflower *,
+.primary-sunflower * { stroke-linecap: round; stroke-linejoin: round; vector-effect: non-scaling-stroke; }
+.petal-ring { fill: var(--petal, var(--sunflower-gold)); stroke: #936a2e; stroke-width: 1.4; stroke-dasharray: 26 1.2 11 .8; }
+.petal-ring ellipse:nth-child(3n) { fill: #bea04f; stroke-width: 1.05; }
+.petal-contour { fill: none; stroke: #665a46; stroke-width: .72; stroke-dasharray: 13 2 4 1.5; opacity: .62; }
+.petal-scribbles { fill: none; stroke: #7c622f; stroke-width: 1.05; opacity: .76; }
+.flower-center { fill: var(--sunflower-umber); stroke: #4e3829; stroke-width: 1.2; }
+.center-edge { fill: none; stroke: #473122; stroke-width: 1.5; stroke-dasharray: 10 1.5 19 1; }
+.center-offset { fill: none; stroke: #9a7347; stroke-width: .8; stroke-dasharray: 7 2; opacity: .72; }
+.seed-marks { fill: none; stroke: #d0ad68; stroke-width: .9; opacity: .74; }
+.flower-stem { fill: none; stroke: var(--stem-sage); stroke-width: 2.1; opacity: .9; }
+.flower-stem .leaf { fill: #8a967d; stroke-width: 1.45; }
+
+.small-marks { position: absolute; inset: 0; z-index: 3; pointer-events: none; color: #756f7d; font-family: 'Gaegu', cursive; opacity: .48; }
+.small-marks span { position: absolute; }
+.mark-d, .mark-e, .mark-g, .mark-h, .mark-i, .mark-j { display: none; }
+.mark-a, .mark-f { color: var(--pencil-royal); }
+.mark-b, .mark-c { color: var(--pencil-cyan); }
+.mark-i { color: var(--pencil-rose); }
+.mark-a { left: 16%; top: 18%; font-size: 2rem; transform: rotate(9deg); }
+.mark-b { right: 17%; top: 15%; font-size: 2.5rem; }
+.mark-c { left: 14%; bottom: 18%; font-size: 2.1rem; }
+.mark-d { right: 27%; top: 24%; font-size: 1.7rem; }
+.mark-e { left: 30%; bottom: 19%; font-size: 1.5rem; transform: rotate(12deg); }
+.mark-f { right: 12%; bottom: 19%; font-size: 2rem; }
+.mark-g { left: 4%; top: 58%; font-size: 2.4rem; letter-spacing: .2em; transform: rotate(-12deg); }
+.mark-h { right: 5%; top: 62%; font-size: 1.25rem; letter-spacing: .25em; transform: rotate(23deg); }
+.mark-i { left: 43%; top: 8%; font-size: 1.6rem; }
+.mark-j { right: 42%; bottom: 7%; font-size: 1.8rem; }
+
+.center-piece { position: relative; z-index: 5; display: grid; width: min(82vw, 900px); min-height: 320px; place-items: center; }
+.title-lockup { position: relative; z-index: 2; display: flex; width: max-content; max-width: 100%; align-items: center; flex-direction: column; padding: 2.1rem 3.2rem 1.8rem; }
+.title-lockup h1 {
+  position: relative;
+  margin: 0;
+  color: var(--pencil-violet);
+  font: 700 clamp(6.35rem, 13.25vw, 11.6rem)/.92 'Dancing Script', 'Segoe Script', 'Brush Script MT', cursive;
+  letter-spacing: .005em;
+  -webkit-text-fill-color: var(--pencil-violet);
+  -webkit-text-stroke: 1.35px var(--charcoal);
+  paint-order: stroke fill;
+  transform: rotate(-.7deg);
+}
+.title-lockup h1::after {
+  content: attr(data-title);
+  position: absolute;
+  inset: 0;
+  color: transparent;
+  -webkit-text-fill-color: transparent;
+  -webkit-text-stroke: .75px #4f4a53;
+  opacity: .66;
+  pointer-events: none;
+  transform: translate(2px, 1px) rotate(.35deg);
+}
+.primary-sunflower { --petal: #cf9732; position: absolute; z-index: 3; right: .9rem; top: .2rem; width: 45px; height: 53px; overflow: visible; transform: rotate(9deg); }
+.primary-sunflower .seed-marks { opacity: .62; }
+.note-trigger {
+  position: relative;
+  appearance: none;
+  max-width: calc(100vw - 2.5rem);
+  margin: 1.1rem 0 0;
+  border: 0;
+  color: #494550;
+  background: transparent;
+  padding: .28rem .36rem .58rem;
+  font: 700 clamp(1.12rem, 2.2vw, 1.55rem)/1.25 'Dancing Script', 'Segoe Script', 'Brush Script MT', cursive;
+  letter-spacing: .01em;
+  word-spacing: .28em;
+  white-space: nowrap;
+  cursor: pointer;
+  transform: rotate(.4deg);
+  transition: color .18s ease, transform .18s ease;
+}
+.note-trigger::before,
+.note-trigger::after { content: ''; position: absolute; right: .15rem; left: .1rem; height: 2px; border-radius: 50%; background: var(--pencil-teal); pointer-events: none; }
+.note-trigger::before { bottom: .31rem; transform: rotate(-.8deg) scaleX(.97); opacity: .88; }
+.note-trigger::after { bottom: .17rem; height: 1px; background: var(--pencil-royal); transform: rotate(.65deg) scaleX(.92); opacity: .72; }
+.note-trigger:hover { color: #4f568f; transform: rotate(-.35deg) translateY(-1px); }
+.note-trigger:active { transform: rotate(.2deg) translateY(1px); }
+.note-trigger:focus-visible { outline: 2px dashed var(--pencil-royal); outline-offset: 5px; border-radius: 3px 7px 4px 6px; }
+.revealed-note { position: relative; width: max-content; max-width: min(calc(100vw - 2.5rem), 48rem); margin: .85rem 0 0; color: var(--charcoal); background: #faf4e7; padding: .45rem 1.05rem .58rem; font: 700 clamp(1.38rem, 2.6vw, 1.9rem)/1.22 'Dancing Script', 'Segoe Script', 'Brush Script MT', cursive; letter-spacing: .01em; word-spacing: .32em; white-space: normal; overflow-wrap: break-word; text-align: center; }
+.revealed-note::before,
+.revealed-note::after { content: ''; position: absolute; top: .2rem; bottom: .2rem; width: 1px; background: #8b959d; opacity: .5; }
+.revealed-note::before { left: .28rem; background: var(--pencil-teal); transform: rotate(-2deg); }
+.revealed-note::after { right: .25rem; background: var(--pencil-royal); transform: rotate(1.5deg); }
+.emphasis { position: absolute; right: -2.75rem; top: 20%; display: flex; gap: 7px; opacity: .62; transform: rotate(-27deg); }
+.emphasis i { width: 3px; height: 17px; border-radius: 50%; background: var(--pencil-rose); }
+.emphasis i:nth-child(1) { transform: rotate(-13deg); }
+.emphasis i:nth-child(3) { transform: rotate(13deg); }
+@media (max-width: 700px) {
+  .sketch-page { min-height: 100svh; }
+  .doodle-lines { width: 172%; left: -36%; }
+  .center-piece { width: 100%; min-height: 310px; }
+  .title-lockup { padding: 1.8rem 1.25rem 1.5rem; }
+  .title-lockup h1 { font-size: clamp(5.15rem, 23vw, 6.8rem); }
+  .primary-sunflower { right: 1.2rem; top: .35rem; width: 40px; height: 47px; }
+  .note-trigger { margin-top: 1.15rem; font-size: 1.28rem; }
+  .revealed-note { margin-top: .9rem; font-size: 1.55rem; }
+  .emphasis { right: -1.1rem; top: 22%; }
+  .sketch-sunflower:nth-child(3), .sketch-sunflower:nth-child(4), .sketch-sunflower:nth-child(6) { display: none; }
+  .mark-d, .mark-e, .mark-i, .mark-j { display: none; }
+  .mark-a { left: 26%; top: 13%; }
+  .mark-b { right: 15%; top: 19%; }
+  .mark-c { left: 18%; bottom: 14%; }
+  .mark-f { right: 15%; bottom: 13%; }
+}
+
+@media (max-height: 620px) {
+  .center-piece { min-height: 250px; }
+  .title-lockup { padding-top: 1rem; padding-bottom: 1rem; }
+  .title-lockup h1 { font-size: min(21vh, 27vw); }
+  .note-trigger { margin-top: .8rem; }
+  .revealed-note { margin-top: .65rem; }
+}
+
+@media (max-width: 360px) {
+  .title-lockup { padding-right: .75rem; padding-left: .75rem; }
+  .title-lockup h1 { font-size: 23vw; }
+  .primary-sunflower { right: .55rem; top: -1.05rem; width: 37px; height: 43px; }
+  .note-trigger { max-width: min(13rem, calc(100vw - 5rem)); font-size: 1.04rem; line-height: 1.2; white-space: normal; text-align: center; text-wrap: balance; }
+  .revealed-note { font-size: 1.4rem; }
+  .emphasis { right: .1rem; }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  *, *::before, *::after { animation-duration: .01ms !important; animation-iteration-count: 1 !important; }
+}
