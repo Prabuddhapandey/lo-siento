@@ -20,3 +20,19 @@ npm run build
 ```
 
 All flowers, construction lines, hatch marks, and paper texture are generated locally. No image or audio assets are requested.
+
+## Deploy on Render
+
+This repository includes a `render.yaml` Blueprint for a Render Static Site.
+
+1. Push the repository to GitHub, GitLab, or Bitbucket.
+2. In Render, choose **New > Blueprint** and connect the repository.
+3. Deploy the `lo-siento` service created from `render.yaml`.
+
+For a manual Static Site setup, use:
+
+- Build command: `npm ci && npm run build`
+- Publish directory: `dist`
+- Node version: `22.22.0`
+
+Do not create this project as a Web Service. It produces static files and does not run a server process.
