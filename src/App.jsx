@@ -100,8 +100,8 @@ function DoodleLines({ reduced }) {
 
 function SmallMarks({ reduced }) {
   const marks = [
-    ['✦', 'mark-a'], ['✧', 'mark-b'], ['✦', 'mark-c'], ['×', 'mark-d'], ['＋', 'mark-e'], ['✧', 'mark-f'],
-    ['···', 'mark-g'], ['////', 'mark-h'], ['✦', 'mark-i'], ['×', 'mark-j'],
+    ['', 'mark-a'], ['', 'mark-b'], ['', 'mark-c'], ['×', 'mark-d'], ['＋', 'mark-e'], ['', 'mark-f'],
+    ['···', 'mark-g'], ['////', 'mark-h'], ['', 'mark-i'], ['×', 'mark-j'],
   ]
   return (
     <motion.div className="small-marks" aria-hidden="true" initial={{ opacity: 0 }} animate={{ opacity: 1 }} transition={{ duration: reduced ? 0 : .8, delay: reduced ? 0 : .45 }}>
