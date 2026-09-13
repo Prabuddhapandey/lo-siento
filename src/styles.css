@@ -102,6 +102,32 @@ html, body, #root { width: 100%; min-width: 320px; height: 100%; min-height: 100
 .mark-i { left: 43%; top: 8%; font-size: 1.6rem; }
 .mark-j { right: 42%; bottom: 7%; font-size: 1.8rem; }
 
+.apology-cat {
+  position: absolute;
+  z-index: 4;
+  left: max(2rem, calc(50% - 34rem));
+  top: calc(50% - 8rem);
+  width: clamp(8.6rem, 12vw, 10.8rem);
+  pointer-events: none;
+  transform-origin: 50% 100%;
+}
+.apology-cat svg { display: block; width: 100%; height: auto; overflow: visible; transform-origin: 50% 100%; }
+.apology-cat * { stroke-linecap: round; stroke-linejoin: round; vector-effect: non-scaling-stroke; }
+.cat-fill { fill: #b8b1c5; stroke: var(--charcoal); stroke-width: 2.25; }
+.cat-outline-offset { fill: none; stroke: #625b68; stroke-width: .8; stroke-dasharray: 18 2 7 1.5; opacity: .68; }
+.cat-ear { fill: #cf9799; stroke: var(--charcoal); stroke-width: 1.55; opacity: .92; }
+.cat-chest,
+.cat-paw { fill: none; stroke: #625b68; stroke-width: 1.45; opacity: .82; }
+.cat-face { fill: none; stroke: var(--charcoal); stroke-width: 1.8; }
+.cat-face .cat-nose { fill: var(--pencil-rose); stroke-width: 1.25; }
+.cat-face .cat-cheek { fill: #c9898e; stroke: none; opacity: .48; }
+.cat-face .cat-whisker { stroke-width: 1.25; opacity: .7; }
+.cat-tail { fill: none; stroke: var(--charcoal); stroke-width: 2.1; }
+.cat-tail .tail-heart { fill: #fffaf2; stroke: var(--pencil-rose); stroke-width: 1.8; }
+.cat-tail .tail-heart-contour { fill: none; stroke: #7d565f; stroke-width: .85; opacity: .7; }
+.cat-ground { fill: none; stroke: var(--pencil-teal); stroke-width: 1.1; stroke-dasharray: 25 2 9 1.5; opacity: .42; }
+.cat-sorry-marks { fill: #fffaf2; stroke: var(--pencil-rose); stroke-width: 1.15; opacity: .76; }
+
 .center-piece { position: relative; z-index: 5; display: grid; width: min(82vw, 900px); min-height: 320px; place-items: center; }
 .title-lockup { position: relative; z-index: 2; display: flex; width: max-content; max-width: 100%; align-items: center; flex-direction: column; padding: 2.1rem 3.2rem 1.8rem; }
 .title-lockup h1 {
@@ -171,12 +197,13 @@ html, body, #root { width: 100%; min-width: 320px; height: 100%; min-height: 100
   .note-trigger { margin-top: 1.15rem; font-size: 1.28rem; }
   .revealed-note { margin-top: .9rem; font-size: 1.55rem; }
   .emphasis { right: -1.1rem; top: 22%; }
-  .sketch-sunflower:nth-child(3), .sketch-sunflower:nth-child(4), .sketch-sunflower:nth-child(6) { display: none; }
+  .sketch-sunflower:nth-child(3), .sketch-sunflower:nth-child(4), .sketch-sunflower:nth-child(6), .sketch-sunflower:nth-child(7) { display: none; }
   .mark-d, .mark-e, .mark-i, .mark-j { display: none; }
   .mark-a { left: 26%; top: 13%; }
   .mark-b { right: 15%; top: 19%; }
   .mark-c { left: 18%; bottom: 14%; }
   .mark-f { right: 15%; bottom: 13%; }
+  .apology-cat { left: max(.55rem, env(safe-area-inset-left)); top: auto; bottom: max(.5rem, env(safe-area-inset-bottom)); width: clamp(4.8rem, 24vw, 6.4rem); opacity: .9; }
 }
 
 @media (max-height: 620px) {
@@ -185,6 +212,7 @@ html, body, #root { width: 100%; min-width: 320px; height: 100%; min-height: 100
   .title-lockup h1 { font-size: min(21vh, 27vw); }
   .note-trigger { margin-top: .8rem; }
   .revealed-note { margin-top: .65rem; }
+  .apology-cat { width: min(20vw, 5.2rem); bottom: max(.3rem, env(safe-area-inset-bottom)); }
 }
 
 @media (max-width: 360px) {

@@ -110,6 +110,65 @@ function SmallMarks({ reduced }) {
   )
 }
 
+function ApologyCat({ reduced }) {
+  return (
+    <motion.div
+      className="apology-cat"
+      aria-hidden="true"
+      initial={{ opacity: 0, x: reduced ? 0 : -22, rotate: reduced ? -1 : -5 }}
+      animate={{ opacity: 1, x: 0, rotate: -1 }}
+      transition={{ duration: reduced ? 0 : .7, delay: reduced ? 0 : 1.05, ease: [0.22, 1, 0.36, 1] }}
+    >
+      <motion.svg
+        viewBox="0 0 180 220"
+        focusable="false"
+        animate={reduced ? undefined : { y: [0, -3, 0], rotate: [-1, .35, -1] }}
+        transition={reduced ? undefined : { duration: 5.8, repeat: Infinity, ease: 'easeInOut' }}
+      >
+        <defs>
+          <filter id="cat-pencil-edge" x="-12%" y="-12%" width="124%" height="124%">
+            <feTurbulence type="fractalNoise" baseFrequency=".018 .075" numOctaves="2" seed="19" result="catNoise" />
+            <feDisplacementMap in="SourceGraphic" in2="catNoise" scale=".8" />
+          </filter>
+        </defs>
+
+        <g className="cat-tail">
+          <path d="M57 172 C26 171 22 198 43 203 C57 207 66 194 58 184" />
+          <path className="tail-heart" d="M38 202 C27 194 17 187 22 178 C26 171 36 176 39 183 C43 176 54 173 57 182 C60 191 49 197 38 202Z" />
+          <path className="tail-heart-contour" d="M39 199 C31 193 25 188 26 182 C28 178 36 184 39 188 C42 183 50 179 53 184" />
+        </g>
+
+        <g className="cat-body" filter="url(#cat-pencil-edge)">
+          <path className="cat-fill" d="M63 103 C45 122 43 156 51 183 C43 190 39 199 42 207 C57 212 76 209 89 203 C101 211 129 212 145 206 C147 196 140 188 132 183 C141 151 137 119 116 103Z" />
+          <path className="cat-outline-offset" d="M65 105 C49 126 48 158 55 184 C48 191 46 198 47 204 M116 106 C134 126 135 155 128 184 C138 191 141 198 140 204" />
+          <path className="cat-chest" d="M77 111 C69 135 72 164 87 185 M106 112 C112 139 106 167 91 186" />
+          <path className="cat-paw" d="M67 180 C62 190 62 200 67 207 M112 181 C118 190 120 200 115 207 M61 205 q8 -4 15 1 M107 206 q9 -5 17 0" />
+        </g>
+
+        <g className="cat-head" filter="url(#cat-pencil-edge)" transform="rotate(4 91 74)">
+          <path className="cat-fill" d="M54 67 L57 28 L82 45 C89 42 97 42 104 45 L127 25 L132 68 C137 91 122 111 95 114 C67 116 49 98 54 67Z" />
+          <path className="cat-ear" d="M61 37 L63 57 L77 47Z M109 47 L124 34 L125 58Z" />
+          <path className="cat-outline-offset" d="M58 67 C54 90 69 109 95 110 C119 109 132 91 128 68 M62 31 L83 49 M105 49 L127 29" />
+          <g className="cat-face">
+            <path d="M68 78 q8 7 16 0 M101 80 q8 7 16 0" />
+            <path className="cat-nose" d="M89 88 q5 -3 10 0 q-5 7 -10 0Z" />
+            <path d="M94 94 C92 99 86 99 83 96 M94 94 C96 100 102 101 106 97" />
+            <path className="cat-whisker" d="M78 93 l-23 -5 M78 98 l-24 2 M109 94 l24 -5 M109 99 l22 3" />
+            <circle className="cat-cheek" cx="72" cy="92" r="6" />
+            <circle className="cat-cheek" cx="115" cy="94" r="6" />
+          </g>
+        </g>
+
+        <path className="cat-ground" d="M27 211 C64 208 111 213 153 209" />
+        <g className="cat-sorry-marks">
+          <path d="M35 82 q-8 -6 -13 2 q5 5 11 8 q7 -6 6 -10 q-1 -5 -4 0Z" />
+          <path d="M27 67 l-6 -7 M38 64 l3 -9" />
+        </g>
+      </motion.svg>
+    </motion.div>
+  )
+}
+
 function CenterPiece({ reduced }) {
   const [noteOpen, setNoteOpen] = useState(false)
 
@@ -158,6 +217,7 @@ export default function App() {
         {SUNFLOWERS.map((flower, index) => <SketchSunflower key={`${flower.x}-${flower.y}`} flower={flower} index={index} reduced={reduced} />)}
       </motion.div>
       <SmallMarks reduced={reduced} />
+      <ApologyCat reduced={reduced} />
       <CenterPiece reduced={reduced} />
     </main>
   )
