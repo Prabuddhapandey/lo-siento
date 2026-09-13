@@ -126,7 +126,7 @@ function CenterPiece({ reduced }) {
           aria-controls="apology-note"
           onClick={() => setNoteOpen((open) => !open)}
         >
-          {noteOpen ? 'Click here to hide the note' : 'Click here to show a note'}
+          {noteOpen ? 'Click here to hide the note' : 'Click here'}
         </button>
         <AnimatePresence initial={false}>
           {noteOpen && (
